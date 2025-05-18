@@ -7,7 +7,7 @@ function məlumatlarıYüklə() {
       "şəxsiMəlumatlar": {
         "ad": "Murad Islamzada",
         "email": "muradislamzada@gmail.com",
-        "doğumTarixi": "2000-01-01",
+        "doğumTarixi": "2000-04-14",
         "təsvir": "Mənim haqqımda qısa məlumat",
         "ünvan": "Bakı, Qaradağ rayonu, Sahil Qəsəbəsi",
         "telefon": "050 993 81 06"
