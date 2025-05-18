@@ -1,0 +1,163 @@
+<!DOCTYPE html> 
+<html lang="az"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Murad Islamzada - CV</title> 
+  <link rel="stylesheet" href="stil5.css"> 
+</head> 
+<body> 
+  <div class="cv-qabi"> 
+    <div class="yan-panel"> 
+      <img src="murad5.png" alt="Murad Islamzada"> 
+      <h2 id="profil-ad">Murad Islamzada</h2>
+      <button id="hamısını-sıfırla" class="sıfırlama-düymə">Hamısını Sıfırla</button>
+      <div class="form-bolme"> 
+        <h3>Şəxsi Məlumatlar</h3> 
+        <form id="şəxsi-form"> 
+          <div class="form-group"> 
+            <label for="ad">Ad:</label> 
+            <input type="text" id="ad" name="ad" required> 
+            <span class="error-message" id="adError"></span> 
+          </div> 
+          <div class="form-group"> 
+            <label for="email">Email:</label> 
+            <input type="email" id="email" name="email" required> 
+            <span class="error-message" id="emailError"></span> 
+          </div> 
+          <div class="form-group"> 
+            <label for="doğum-tarixi">Doğum Tarixi:</label> 
+            <input type="date" id="doğum-tarixi" name="doğum-tarixi" required> 
+            <span class="error-message" id="tarixError"></span> 
+          </div> 
+          <div class="form-group"> 
+            <label for="təsvir">Təsvir:</label> 
+            <textarea id="təsvir" name="təsvir" maxlength="200" required></textarea> 
+            <span class="error-message" id="təsvirError"></span> 
+            <span id="təsvirSay">0/200</span> 
+          </div> 
+          <div class="form-group"> 
+            <label for="ünvan">Ünvan:</label> 
+            <input type="text" id="ünvan" name="ünvan"> 
+          </div> 
+          <div class="form-group"> 
+            <label for="telefon">Əlaqə:</label> 
+            <input type="tel" id="telefon" name="telefon"> 
+          </div> 
+          <button type="submit" id="yadda-saxla">Yadda Saxla</button> 
+        </form> 
+      </div> 
+      <div class="məlumatlar"> 
+        <div class="məlumat-sətri">
+          <p><strong>Doğum Tarixi:</strong> <span id="doğum-tarixi-göstər"></span></p>
+          <button class="düzəliş-et" data-field="doğumTarixi">Düzəliş et</button>
+        </div>
+        <div class="məlumat-sətri">
+          <p><strong>Əlaqə:</strong> <span id="telefon-göstər"></span></p>
+          <button class="düzəliş-et" data-field="telefon">Düzəliş et</button>
+        </div>
+        <div class="məlumat-sətri">
+          <p><strong>Email:</strong> <span id="email-göstər"></span></p>
+          <button class="düzəliş-et" data-field="email">Düzəliş et</button>
+        </div>
+        <div class="məlumat-sətri">
+          <p><strong>Ünvan:</strong> <span id="ünvan-göstər"></span></p>
+          <button class="düzəliş-et" data-field="ünvan">Düzəliş et</button>
+        </div>
+      </div> 
+      <div class="dillər"> 
+        <h3>Dillər</h3> 
+        <ul id="dillər-list"> 
+          <li>English - A2</li> 
+          <li>Türk - Çox yaxşı</li> 
+          <li>Azərbaycan - Çox yaxşı</li> 
+        </ul>
+        <button class="düzəliş-et" data-section="dillər">Düzəliş et</button>
+      </div> 
+    </div> 
+    <div class="məzmun"> 
+      <div class="bolme" id="təhsil-bolme"> 
+        <div class="bolme-başlıq">
+          <h2>Təhsil</h2>
+          <button class="düzəliş-et" data-section="Təhsil">Düzəliş et</button>
+        </div>
+        <div class="icerik"> 
+        </div> 
+        <div class="əlavə-formu">
+          <input type="text" placeholder="Yeni məlumat daxil edin" class="yeni-məlumat"> 
+          <button class="elave-et" data-section="Təhsil">Əlavə et</button>
+        </div>
+      </div> 
+      <div class="bolme" id="bacarıqlar-bolme"> 
+        <div class="bolme-başlıq">
+          <h2>Bacarıqlar</h2>
+          <button class="düzəliş-et" data-section="Bacarıqlar">Düzəliş et</button>
+        </div>
+        <div class="icerik"> 
+        </div> 
+        <div class="əlavə-formu">
+          <input type="text" placeholder="Yeni məlumat daxil edin" class="yeni-məlumat"> 
+          <button class="elave-et" data-section="Bacarıqlar">Əlavə et</button>
+        </div>
+      </div> 
+      <div class="bolme" id="iş-təcrübəsi-bolme">
+        <div class="bolme-başlıq">
+          <h2>İş Təcrübəsi</h2>
+          <button class="düzəliş-et" data-section="İş Təcrübəsi">Düzəliş et</button>
+        </div>
+        <div class="icerik"> 
+        </div> 
+        <div class="əlavə-formu">
+          <input type="text" placeholder="Yeni məlumat daxil edin" class="yeni-məlumat"> 
+          <button class="elave-et" data-section="İş Təcrübəsi">Əlavə et</button>
+        </div>
+      </div> 
+      <div class="bolme" id="haqqımda-bolme"> 
+        <div class="bolme-başlıq">
+          <h2>Haqqımda</h2>
+          <button class="düzəliş-et" data-section="Haqqımda">Düzəliş et</button>
+        </div>
+        <div class="icerik"> 
+        </div> 
+        <div class="əlavə-formu">
+          <input type="text" placeholder="Yeni məlumat daxil edin" class="yeni-məlumat"> 
+          <button class="elave-et" data-section="Haqqımda">Əlavə et</button>
+        </div>
+      </div> 
+      <div class="bolme" id="şəxsi-keyfiyyətlər-bolme"> 
+        <div class="bolme-başlıq">
+          <h2>Şəxsi Keyfiyyətlər</h2>
+          <button class="düzəliş-et" data-section="Şəxsi Keyfiyyətlər">Düzəliş et</button>
+        </div>
+        <div class="icerik"> 
+        </div> 
+        <div class="əlavə-formu">
+          <input type="text" placeholder="Yeni məlumat daxil edin" class="yeni-məlumat"> 
+          <button class="elave-et" data-section="Şəxsi Keyfiyyətlər">Əlavə et</button>
+        </div>
+      </div> 
+      <div class="bolme" id="hobbi-maraqlar-bolme"> 
+        <div class="bolme-başlıq">
+          <h2>Hobbi və Maraqlar</h2>
+          <button class="düzəliş-et" data-section="Hobbi və Maraqlar">Düzəliş et</button>
+        </div>
+        <div class="icerik"> 
+        </div> 
+        <div class="əlavə-formu">
+          <input type="text" placeholder="Yeni məlumat daxil edin" class="yeni-məlumat"> 
+          <button class="elave-et" data-section="Hobbi və Maraqlar">Əlavə et</button>
+        </div>
+      </div> 
+    </div> 
+  </div>
+  <div id="redaktə-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3 id="modal-title">Düzəliş et</h3>
+      <div id="modal-body"></div>
+      <button id="modal-save">Yadda Saxla</button>
+    </div>
+  </div>
+  <script src="script5.js"></script> 
+</body> 
+</html>

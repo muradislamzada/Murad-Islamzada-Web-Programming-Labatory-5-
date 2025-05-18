@@ -1,0 +1,36 @@
+{
+  "şəxsiMəlumatlar": {
+    "ad": "Murad Islamzada",
+    "email": "muradislamzada@gmail.com",
+    "doğumTarixi": "2000-01-01",
+    "təsvir": "Mənim haqqımda qısa məlumat",
+    "ünvan": "Bakı, Qaradağ rayonu, Sahil Qəsəbəsi",
+    "telefon": "050 993 81 06"
+  },
+  "məlumatlar": {
+    "Təhsil": [
+      "Azərbaycan Texniki Universiteti - İnformasiya Təhlükəsizliyi (1-ci kurs, 2024 - Davam edir)"
+    ],
+    "Bacarıqlar": [
+      "✔Proqramlaşdırma dilləri (Python, C++, Java və s.)",
+      "✔Frontend Texnologiyaları (HTML, CSS və s.)",
+      "✔Ofis Proqramları (MS Word, MS Excel, MS PowerPoint)"
+    ],
+    "İş Təcrübəsi": ["Praktikaya Gediləcək"],
+    "Haqqımda": [
+      "Mən dəqiq, çevik və komanda ilə işləməyə həvəsli biriyəm. Verilən tapşırıqların öhdəsindən yüksək səviyyədə gəlmək üçün daim çalışıram. İşləyəcəyim vəzifə üçün bütün bacarıq və keyfiyyətlərimi səmərəli şəkildə istifadə etməyə və bu işə həvəslə yanaşmağa hazıram. Həmçinin, yeni təcrübə imkanlarını dəyərləndirməyə və biliklərimi genişləndirməyə maraqlıyam."
+    ],
+    "Şəxsi Keyfiyyətlər": [
+      "✔Yüksək iş etikası",
+      "✔Problemlərin səmərəli həlli",
+      "✔Analitik düşünmək",
+      "✔Təqdimat bacarıqları",
+      "✔Yüksək ünsiyyət bacarığı",
+      "✔Stressə davamlı",
+      "✔Kollektiv ilə işləmə"
+    ],
+    "Hobbi və Maraqlar": [
+      "İdman ilə məşğul olmaq, futbol oynamaq, inkişaf üçün əlavə biliklər əldə etməyə çalışmaq."
+    ]
+  }
+}
