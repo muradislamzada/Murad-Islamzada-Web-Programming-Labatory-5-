@@ -2,8 +2,8 @@
   "şəxsiMəlumatlar": {
     "ad": "Murad Islamzada",
     "email": "muradislamzada@gmail.com",
-    "doğumTarixi": "2000-01-01",
-    "təsvir": "Mənim haqqımda qısa məlumat",
+    "doğumTarixi": "2007-04-14",
+    "təsvir": "Mən dəqiq, çevik və komanda ilə işləməyə həvəsli biriyəm. Verilən tapşırıqların öhdəsindən yüksək səviyyədə gəlmək üçün daim çalışıram.",
     "ünvan": "Bakı, Qaradağ rayonu, Sahil Qəsəbəsi",
     "telefon": "050 993 81 06"
   },
@@ -16,7 +16,9 @@
       "✔Frontend Texnologiyaları (HTML, CSS və s.)",
       "✔Ofis Proqramları (MS Word, MS Excel, MS PowerPoint)"
     ],
-    "İş Təcrübəsi": ["Praktikaya Gediləcək"],
+    "İş Təcrübəsi": [
+      "Praktikaya Gediləcək"
+    ],
     "Haqqımda": [
       "Mən dəqiq, çevik və komanda ilə işləməyə həvəsli biriyəm. Verilən tapşırıqların öhdəsindən yüksək səviyyədə gəlmək üçün daim çalışıram. İşləyəcəyim vəzifə üçün bütün bacarıq və keyfiyyətlərimi səmərəli şəkildə istifadə etməyə və bu işə həvəslə yanaşmağa hazıram. Həmçinin, yeni təcrübə imkanlarını dəyərləndirməyə və biliklərimi genişləndirməyə maraqlıyam."
     ],
@@ -31,6 +33,11 @@
     ],
     "Hobbi və Maraqlar": [
       "İdman ilə məşğul olmaq, futbol oynamaq, inkişaf üçün əlavə biliklər əldə etməyə çalışmaq."
+    ],
+    "Dillər": [
+      "English - A2",
+      "Türk - Çox yaxşı",
+      "Azərbaycan - Çox yaxşı"
     ]
   }
 }
