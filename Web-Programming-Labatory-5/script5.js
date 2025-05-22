@@ -1,13 +1,25 @@
 let şəxsiMəlumatlar = {};
 let melumatlar = {};
 let orijinalMəlumatlar = {};
-function məlumatlarıYüklə() {
-  return new Promise((resolve) => {
+async function məlumatlarıYüklə() {
+  document.body.innerHTML += '<div id="loading">Yüklənir...</div>';
+  try {
+    const response = await fetch('data.json');
+    if (!response.ok) throw new Error('Network error');
+    const data = await response.json();
+    şəxsiMəlumatlar = JSON.parse(localStorage.getItem('şəxsiMəlumatlar')) || data.şəxsiMəlumatlar;
+    melumatlar = JSON.parse(localStorage.getItem('cvMəlumatları')) || data.məlumatlar;
+    orijinalMəlumatlar = {
+      şəxsiMəlumatlar: JSON.parse(JSON.stringify(şəxsiMəlumatlar)),
+      melumatlar: JSON.parse(JSON.stringify(melumatlar))
+    };
+  } catch (error) {
+    console.error('Xəta:', error);
     const simulatedJsonResponse = {
       "şəxsiMəlumatlar": {
         "ad": "Murad Islamzada",
         "email": "muradislamzada@gmail.com",
-        "doğumTarixi": "2000-04-14",
+        "doğumTarixi": "2000-01-01",
         "təsvir": "Mənim haqqımda qısa məlumat",
         "ünvan": "Bakı, Qaradağ rayonu, Sahil Qəsəbəsi",
         "telefon": "050 993 81 06"
@@ -36,26 +48,33 @@ function məlumatlarıYüklə() {
         ],
         "Hobbi və Maraqlar": [
           "İdman ilə məşğul olmaq, futbol oynamaq, inkişaf üçün əlavə biliklər əldə etməyə çalışmaq."
+        ],
+        "Dillər": [
+          "English - A2",
+          "Türk - Çox yaxşı",
+          "Azərbaycan - Çox yaxşı"
         ]
       }
     };
-    setTimeout(() => {
-      const yerliŞəxsiMəlumatlar = JSON.parse(localStorage.getItem('şəxsiMəlumatlar') || 'null');
-      const yerliCvMəlumatları = JSON.parse(localStorage.getItem('cvMəlumatları') || 'null');
-      if (yerliŞəxsiMəlumatlar && yerliCvMəlumatları) {
-        şəxsiMəlumatlar = yerliŞəxsiMəlumatlar;
-        melumatlar = yerliCvMəlumatları;
-      } else {
-        şəxsiMəlumatlar = simulatedJsonResponse.şəxsiMəlumatlar;
-        melumatlar = simulatedJsonResponse.məlumatlar;
-      }
-      orijinalMəlumatlar = {
-        şəxsiMəlumatlar: JSON.parse(JSON.stringify(şəxsiMəlumatlar)),
-        melumatlar: JSON.parse(JSON.stringify(melumatlar))
-      };
-      resolve();
-    }, 500);
-  });
+    const yerliŞəxsiMəlumatlar = JSON.parse(localStorage.getItem('şəxsiMəlumatlar') || 'null');
+    const yerliCvMəlumatları = JSON.parse(localStorage.getItem('cvMəlumatları') || 'null');
+    if (yerliŞəxsiMəlumatlar && yerliCvMəlumatları) {
+      şəxsiMəlumatlar = yerliŞəxsiMəlumatlar;
+      melumatlar = yerliCvMəlumatları;
+    } else {
+      şəxsiMəlumatlar = simulatedJsonResponse.şəxsiMəlumatlar;
+      melumatlar = simulatedJsonResponse.məlumatlar;
+    }
+    orijinalMəlumatlar = {
+      şəxsiMəlumatlar: JSON.parse(JSON.stringify(şəxsiMəlumatlar)),
+      melumatlar: JSON.parse(JSON.stringify(melumatlar))
+    };
+  } finally {
+    const loadingElement = document.getElementById('loading');
+    if (loadingElement) {
+      loadingElement.remove();
+    }
+  }
 }
 function localStorageYaddaSaxla() {
   localStorage.setItem('şəxsiMəlumatlar', JSON.stringify(şəxsiMəlumatlar));
@@ -226,27 +245,6 @@ function dilləriRedaktəEt() {
     const buttonDiv = document.getElementById('yeni-dil-əlavə-et').parentElement;
     buttonDiv.parentElement.insertBefore(newInputDiv, buttonDiv);
   });
-  document.getElementById('modal-save').addEventListener('click', function() {
-    const dilInputları = document.querySelectorAll('.dil-input');
-    const yeniDillər = [];
-    dilInputları.forEach(input => {
-      if (input.value.trim() !== '') {
-        yeniDillər.push(input.value.trim());
-      }
-    });
-    dilListi.innerHTML = '';
-    yeniDillər.forEach(dil => {
-      const li = document.createElement('li');
-      li.textContent = dil;
-      dilListi.appendChild(li);
-    });
-    document.getElementById('redaktə-modal').style.display = 'none';
-    if (!melumatlar['Dillər']) {
-      melumatlar['Dillər'] = [];
-    }
-    melumatlar['Dillər'] = yeniDillər;
-    localStorageYaddaSaxla();
-  });
 }
 function şəxsiSahəniRedaktəEt(sahə) {
   let htmlContent = '';
@@ -296,29 +294,6 @@ function şəxsiSahəniRedaktəEt(sahə) {
   }
   modalıAç(`${label} Redaktə Et`, htmlContent);
   aktivRedaktəSahəsi = sahə;
-  document.getElementById('modal-save').addEventListener('click', function() {
-    switch(sahə) {
-      case 'doğumTarixi':
-        şəxsiMəlumatlar.doğumTarixi = document.getElementById('modal-doğum-tarixi').value;
-        document.getElementById('doğum-tarixi-göstər').textContent = şəxsiMəlumatlar.doğumTarixi;
-        break;
-      case 'telefon':
-        şəxsiMəlumatlar.telefon = document.getElementById('modal-telefon').value;
-        document.getElementById('telefon-göstər').textContent = şəxsiMəlumatlar.telefon;
-        break;
-      case 'email':
-        şəxsiMəlumatlar.email = document.getElementById('modal-email').value;
-        document.getElementById('email-göstər').textContent = şəxsiMəlumatlar.email;
-        break;
-      case 'ünvan':
-        şəxsiMəlumatlar.ünvan = document.getElementById('modal-ünvan').value;
-        document.getElementById('ünvan-göstər').textContent = şəxsiMəlumatlar.ünvan;
-        break;
-    }
-    document.getElementById('redaktə-modal').style.display = 'none';
-    localStorageYaddaSaxla();
-    formaMəlumatlarınıDoldur();
-  });
 }
 function bölməniRedaktəEt(bölməAdı) {
   const bölməMəlumatları = melumatlar[bölməAdı] || [];
@@ -346,7 +321,6 @@ function bölməniRedaktəEt(bölməAdı) {
     </div>
   `;
   modalıAç(`${bölməAdı} Bölməsini Redaktə Et`, htmlContent);
-  
   aktivRedaktəBölməsi = bölməAdı;
   document.getElementById('yeni-məlumat-əlavə-et').addEventListener('click', function() {
     const inputs = document.querySelectorAll('.bölmə-input');
@@ -362,20 +336,6 @@ function bölməniRedaktəEt(bölməAdı) {
     const buttonDiv = document.getElementById('yeni-məlumat-əlavə-et').parentElement;
     buttonDiv.parentElement.insertBefore(newInputDiv, buttonDiv);
   });
-  document.getElementById('modal-save').addEventListener('click', function() {
-    const məlumatGirişləri = document.querySelectorAll('.bölmə-input');
-    const yeniMəlumatlar = [];
-    məlumatGirişləri.forEach(input => {
-      if (input.value.trim() !== '') {
-        yeniMəlumatlar.push(input.value.trim());
-      }
-    });
-    melumatlar[bölməAdı] = yeniMəlumatlar;
-    const icərikElementi = document.querySelector(`#${bölməAdı.toLowerCase().replace(/\s+/g, '-')}-bolme .icerik`);
-    icerikYenilə(icərikElementi, yeniMəlumatlar, bölməAdı);
-    document.getElementById('redaktə-modal').style.display = 'none';
-    localStorageYaddaSaxla();
-  });
 }
 function hamısınıSıfırla() {
   if (confirm("Bütün məlumatları ilkin vəziyyətə qaytarmaq istəyirsiniz?")) {
@@ -385,6 +345,102 @@ function hamısınıSıfırla() {
     formaMəlumatlarınıDoldur();
     bölmələriYüklə();
     alert("Bütün məlumatlar ilkin vəziyyətə qaytarıldı!");
+  }
+}
+function bölməToggle() {
+  const bölməBaşlıqları = document.querySelectorAll('.bolme h2');
+  bölməBaşlıqları.forEach(başlıq => {
+    başlıq.style.cursor = 'pointer';
+    başlıq.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const bölmə = this.closest('.bolme');
+      const icərik = bölmə.querySelector('.icerik');
+      const əlavəFormu = bölmə.querySelector('.əlavə-formu');
+      if (icərik && əlavəFormu) {
+        if (icərik.style.display === 'none') {
+          icərik.style.display = 'block';
+          əlavəFormu.style.display = 'flex';
+          this.classList.remove('collapsed');
+        } else {
+          icərik.style.display = 'none';
+          əlavəFormu.style.display = 'none';
+          this.classList.add('collapsed');
+        }
+      }
+    });
+  });
+}
+function eventListenerleriTətbiqEt() {
+  document.getElementById('modal-save').addEventListener('click', function() {
+    if (aktivRedaktəBölməsi === 'dillər') {
+      const yeniDillər = [];
+      document.querySelectorAll('.dil-input').forEach(input => {
+        if (input.value.trim()) yeniDillər.push(input.value.trim());
+      });
+      melumatlar['Dillər'] = yeniDillər;
+      localStorage.setItem('cvMəlumatları', JSON.stringify(melumatlar));
+      
+      const dilListi = document.getElementById('dillər-list');
+      if (dilListi) {
+        dilListi.innerHTML = yeniDillər.map(dil => `<li>${dil}</li>`).join('');
+      }
+    } else if (aktivRedaktəSahəsi) {
+      switch(aktivRedaktəSahəsi) {
+        case 'doğumTarixi':
+          şəxsiMəlumatlar.doğumTarixi = document.getElementById('modal-doğum-tarixi').value;
+          document.getElementById('doğum-tarixi-göstər').textContent = şəxsiMəlumatlar.doğumTarixi;
+          break;
+        case 'telefon':
+          şəxsiMəlumatlar.telefon = document.getElementById('modal-telefon').value;
+          document.getElementById('telefon-göstər').textContent = şəxsiMəlumatlar.telefon;
+          break;
+        case 'email':
+          şəxsiMəlumatlar.email = document.getElementById('modal-email').value;
+          document.getElementById('email-göstər').textContent = şəxsiMəlumatlar.email;
+          break;
+        case 'ünvan':
+          şəxsiMəlumatlar.ünvan = document.getElementById('modal-ünvan').value;
+          document.getElementById('ünvan-göstər').textContent = şəxsiMəlumatlar.ünvan;
+          break;
+      }
+      localStorageYaddaSaxla();
+      formaMəlumatlarınıDoldur();
+    } else if (aktivRedaktəBölməsi) {
+      const məlumatGirişləri = document.querySelectorAll('.bölmə-input');
+      const yeniMəlumatlar = [];
+      məlumatGirişləri.forEach(input => {
+        if (input.value.trim() !== '') {
+          yeniMəlumatlar.push(input.value.trim());
+        }
+      });
+      melumatlar[aktivRedaktəBölməsi] = yeniMəlumatlar;
+      const icərikElementi = document.querySelector(`#${aktivRedaktəBölməsi.toLowerCase().replace(/\s+/g, '-')}-bolme .icerik`);
+      if (icərikElementi) {
+        icerikYenilə(icərikElementi, yeniMəlumatlar, aktivRedaktəBölməsi);
+      }
+      localStorageYaddaSaxla();
+    }
+    document.getElementById('redaktə-modal').style.display = 'none';
+    aktivRedaktəBölməsi = null;
+    aktivRedaktəSahəsi = null;
+  });
+  document.querySelectorAll('.düzəliş-et').forEach(düymə => {
+    düymə.addEventListener('click', function() {
+      const dataSection = this.dataset.section;
+      const dataField = this.dataset.field;
+      if (dataField) {
+        şəxsiSahəniRedaktəEt(dataField);
+      } else if (dataSection === 'dillər') {
+        dilləriRedaktəEt();
+      } else if (dataSection) {
+        bölməniRedaktəEt(dataSection);
+      }
+    });
+  });
+  const resetBtn = document.getElementById('hamısını-sıfırla');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', hamısınıSıfırla);
   }
 }
 window.onload = async function () {
@@ -452,19 +508,9 @@ window.onload = async function () {
       }
     });
   }
-  document.getElementById('hamısını-sıfırla').addEventListener('click', hamısınıSıfırla);
-  document.querySelectorAll('.düzəliş-et').forEach(düymə => {
-    düymə.addEventListener('click', function() {
-      const dataSection = this.dataset.section;
-      const dataField = this.dataset.field;
-      if (dataField) {
-        şəxsiSahəniRedaktəEt(dataField);
-      } else if (dataSection === 'dillər') {
-        dilləriRedaktəEt();
-      } else if (dataSection) {
-        bölməniRedaktəEt(dataSection);
-      }
-    });
-  });
+  eventListenerleriTətbiqEt();
   əlavəEtməFunksiyalarınıTətbiqEt();
+  setTimeout(() => {
+    bölməToggle();
+  }, 1000);
 };
